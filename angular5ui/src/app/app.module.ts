@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpHandler } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +23,10 @@ import { AuthService as AuthServ } from './services/auth.service.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+  ],
+  exports:[
+    FormsModule
   ],
   providers: [AuthGuard,AuthServ, DatabaseService, DictionaryService, HttpClient],
   bootstrap: [AppComponent]

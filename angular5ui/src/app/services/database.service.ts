@@ -16,7 +16,7 @@ export class DatabaseService {
     }
     // ----------------------------------- Variables -----------------------------------------
     // URLs
-    public serverUrl               : string = 'http://192.168.0.15:8085/';    
+    public serverUrl               : string = 'http://192.168.0.15:8085/api/';    
     public apiVersion              : string = "v1";
     public auth                    : string;
     public dbName                  : string;
@@ -64,9 +64,9 @@ export class DatabaseService {
         let url = this.serverUrl + 'preauth/apiversion';
         return this.http.get<any>(url);
     }
-    createLogin(email: string, password: string) {
-        let body = JSON.stringify({ email: email, password: password});
-        let headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization' : 'Basic ' + btoa(email + ':' + password)});
+    createLogin(username: string, password: string) {
+        let body = JSON.stringify({ username: username, password: password});
+        let headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization' : 'Basic ' + btoa(username + ':' + password)});
         let url = this.serverUrl + 'auth/login';
         return this.http.post<any>(url, body, {headers});
     }

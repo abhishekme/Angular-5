@@ -12,7 +12,7 @@ export class AuthService implements CanActivate {
         private dictionary: DictionaryService,
         private router: Router) { 
 
-            localStorage.setItem('logToken','Hello123');
+            //localStorage.setItem('logToken','Hello123');
         }
 
     private subscriptions: Subscription[] = [];
@@ -36,8 +36,20 @@ export class AuthService implements CanActivate {
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean {
-        const getToken  = JSON.parse(JSON.stringify(localStorage.getItem('logToken')));
-        console.log(getToken);
+        
+        let currentUser;
+        currentUser  = JSON.parse(sessionStorage.getItem('currentUser'));
+
+        if(currentUser != null){
+
+        }else{
+            
+        }
+
+
+
+        //JSON.parse(JSON.stringify(localStorage.getItem('logToken')));
+        /*console.log(getToken);
           if (getToken != '' && getToken != null && getToken !== undefined )  {
             const tokenObj 	= (getToken);
             if (getToken === '' || getToken === undefined) {
@@ -48,13 +60,13 @@ export class AuthService implements CanActivate {
                 return true;
             }
             //this.router.navigateByUrl('/Home');
-            alert('Login to home...');
+            //alert('Login to home...');
             //return false;
             }
             this.router.navigateByUrl('/Home');
         } else {
           return true;
-        }
-        
+        }*/
+        return;
         }
 }

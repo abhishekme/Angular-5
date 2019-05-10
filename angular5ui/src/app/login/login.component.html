@@ -1,3 +1,18 @@
-<p>
-  login works!
-</p>
+
+
+<div class="login-form">
+  <form #f="ngForm" (ngSubmit)="loginSubmit(f)" novalidate>
+    <div class="form-group">
+      <label for="email">Username:</label>
+      {{loginForm.username}}
+      <input type="text" [(ngModel)]="loginForm.username" #email="ngModel" id="username" name="username" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" [(ngModel)]="loginForm.password"  name = "password" required>
+    </div>
+    #{{email.invalid}}
+    <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+  </form>
+</div>
+

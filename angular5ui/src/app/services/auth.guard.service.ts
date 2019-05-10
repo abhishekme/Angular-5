@@ -47,9 +47,18 @@ export class AuthGuard implements CanActivate {
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean {
-          const getToken  = JSON.parse(JSON.stringify(localStorage.getItem('logToken')));
-          console.log(getToken);
-        if (getToken != '' && getToken != null && getToken !== undefined )  {
+            //const getToken  = JSON.parse(JSON.stringify(localStorage.getItem('logToken')));
+            let currentUser;
+            currentUser  = (sessionStorage.getItem('currentUser'));
+            console.log('AUth guard User: ', currentUser);
+            if(currentUser != null){
+                alert('login seuccess...');
+                return true;
+            }else{
+                alert('dddd');
+                return false;
+            }
+        /*if (getToken != '' && getToken != null && getToken !== undefined )  {
               const tokenObj 	= (getToken);
               console.log(tokenObj);
               const thisToken = tokenObj.token;
@@ -62,7 +71,7 @@ export class AuthGuard implements CanActivate {
           }
           alert('@Login to home...');
           this.router.navigate(['/Login']);
-          return false;
+          return false;*/
       }
 
     /*canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
