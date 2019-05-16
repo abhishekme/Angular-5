@@ -21,93 +21,27 @@ export class AuthGuard implements CanActivate {
         this.subscriptions.forEach(s => s.unsubscribe());
     }
 
-    /*canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        let url: string = state.url;
-        let currentUser;
-        alert('auth guard');
-        console.log(localStorage.getItem('loginToken'));
-        currentUser = JSON.parse(JSON.stringify(localStorage.getItem('loginToken')));
-        //console.log('### Log Token:: ',currentUser);
-        //alert('dsfdsfd');
-        
-        if (currentUser != null) {
-            //url = "/Home";
-            //this.router.navigate([url]);
-            return true;
-        }
-        else {
-            //localStorage.clear();
-            //this.database.clearData();
-            //this.router.navigate(['/Login']);
-            return false;
-        }
-        //return this.database.isAuthenticated();
-    }*/
-
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean {
-            //const getToken  = JSON.parse(JSON.stringify(localStorage.getItem('logToken')));
             let currentUser;
             currentUser  = (sessionStorage.getItem('currentUser'));
-            console.log('AUth guard User: ', currentUser);
             if(currentUser != null){
-                alert('login seuccess...');
+                alert(1);
                 return true;
             }else{
-                alert('dddd');
+                alert(2);
                 return false;
             }
-        /*if (getToken != '' && getToken != null && getToken !== undefined )  {
-              const tokenObj 	= (getToken);
-              console.log(tokenObj);
-              const thisToken = tokenObj.token;
-              if (thisToken == null || thisToken == undefined) {
-                this.router.navigate(['/Login']);
-                return false;
-              }
-              alert('#Login to home...');
-              return true;
-          }
-          alert('@Login to home...');
-          this.router.navigate(['/Login']);
-          return false;*/
       }
 
-    /*canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        let url: string = state.url;
-
+    canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         let currentUser;
-        if (this.dictionary.debugMode) {
-            currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        currentUser  = (sessionStorage.getItem('currentUser'));
+        if(currentUser != null){
+            return true;
+        }else{
+            return false;
         }
-        else {
-            currentUser = this.database.userInfo;
-        }
-        if (currentUser != null) {
-            this.database.setInfo(currentUser.auth, currentUser.license, currentUser.session, currentUser.database, currentUser.databases, currentUser.serverUrl, currentUser.apiVersion);
-            this.subscriptions.push(this.database.validateSession().subscribe(
-                    data => {
-                        this.database.setAuthenticated(true);
-                        this.database.setCurrentUser(currentUser.user);
-                    },
-                    err => {
-                        for (var i in this.database.loading) {
-                            this.database.loading[i].active = false;
-                        }
-                        sessionStorage.clear();
-                        this.database.clearData();
-                        this.router.navigate(['/Login'], { queryParams: { 'returnUrl': state.url } });
-                        this.notification.setErrorMessage(err, this.dictionary.invalidSession);
-                    }
-                )
-        );
-        }
-        else {
-            sessionStorage.clear();
-            this.database.clearData();
-            this.router.navigate(['/Login']);
-        }
-        return this.database.isAuthenticated();
-    }*/
+    }
 }

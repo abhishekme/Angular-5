@@ -17,10 +17,6 @@ export class AuthService implements CanActivate {
 
     private subscriptions: Subscription[] = [];
 
-    ngOnDestroy() {
-        this.subscriptions.forEach(s => s.unsubscribe());
-    }
-
     /*canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         let currentUser = '';;
         currentUser = JSON.parse(JSON.stringify(localStorage.getItem('loginToken')));
@@ -30,8 +26,6 @@ export class AuthService implements CanActivate {
             return false;
         }
         return true;
-
-        
     }*/
     canActivate(
         next: ActivatedRouteSnapshot,
@@ -39,34 +33,26 @@ export class AuthService implements CanActivate {
         
         let currentUser;
         currentUser  = JSON.parse(sessionStorage.getItem('currentUser'));
-
-        if(currentUser != null){
-
-        }else{
-            
-        }
-
-
-
-        //JSON.parse(JSON.stringify(localStorage.getItem('logToken')));
-        /*console.log(getToken);
-          if (getToken != '' && getToken != null && getToken !== undefined )  {
-            const tokenObj 	= (getToken);
-            if (getToken === '' || getToken === undefined) {
-            return true;
-            } else {
-            const thisToken = tokenObj;
-            if (thisToken == null || thisToken == undefined) {
+            if(currentUser != null)
+            {
                 return true;
+            }else{
+                return false;
             }
-            //this.router.navigateByUrl('/Home');
-            //alert('Login to home...');
-            //return false;
-            }
-            this.router.navigateByUrl('/Home');
-        } else {
-          return true;
-        }*/
-        return;
         }
+    
+    authCheck(){
+        let currentUser = sessionStorage.getItem('currentUser');
+        if(currentUser != ''){
+            currentUser  = JSON.parse(sessionStorage.getItem('currentUser'));
+        }        
+        if(currentUser != ''){
+            alert('1111');
+            this.router.navigate(['/Home']);
+        }
+        if(currentUser === '' || currentUser === undefined){
+            alert('2222');
+            this.router.navigate(['/Login']);
+        }
+    }
 }
