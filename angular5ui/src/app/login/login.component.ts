@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
         this.loginForm['username'] = '';
         this.loginForm['password'] = '';
         //Auth check redirect
-        //this.authServ.authCheck();
+        this.authServ.authCheck();
     }
 
     loginSubmit(formObj){
@@ -41,8 +41,8 @@ export class LoginComponent implements OnInit {
                         token:  data.loginToken
                       }
                       sessionStorage.setItem('currentUser',JSON.stringify(currentUser));
-                      alert('dddd');
-                      this.router.navigateByUrl('Home');
+                      console.log('login redirecting');
+                      this.router.navigateByUrl('/Home');
                     } 
                     if(!data.status){
                     }

@@ -11,47 +11,31 @@ export class AuthService implements CanActivate {
     constructor(private database: DatabaseService,
         private dictionary: DictionaryService,
         private router: Router) { 
-
-            //localStorage.setItem('logToken','Hello123');
         }
-
-    private subscriptions: Subscription[] = [];
-
-    /*canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        let currentUser = '';;
-        currentUser = JSON.parse(JSON.stringify(localStorage.getItem('loginToken')));
-        alert('auth service');
-        if(currentUser != null){
-            //this.router.navigate(['/Home']);
-            return false;
-        }
-        return true;
-    }*/
+        private subscriptions: Subscription[] = [];
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean {
         
         let currentUser;
         currentUser  = JSON.parse(sessionStorage.getItem('currentUser'));
-            if(currentUser != null)
-            {
-                return true;
-            }else{
-                return false;
-            }
+        if(currentUser != null)
+        {
+            this.router.navigate(['/Home']);
+        }else{
+            return true;
         }
+    }
     
     authCheck(){
         let currentUser = sessionStorage.getItem('currentUser');
-        if(currentUser != ''){
+        if(currentUser != null){
             currentUser  = JSON.parse(sessionStorage.getItem('currentUser'));
         }        
-        if(currentUser != ''){
-            alert('1111');
+        if(currentUser !== null){
             this.router.navigate(['/Home']);
         }
-        if(currentUser === '' || currentUser === undefined){
-            alert('2222');
+        if(currentUser === null || currentUser === undefined){
             this.router.navigate(['/Login']);
         }
     }

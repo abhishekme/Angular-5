@@ -9,16 +9,15 @@ import { ServiceComponent } from './service/service.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'Login', pathMatch: 'full' },
-  { path: '**', redirectTo: 'Login'},
-  { path: 'Login', component: LoginComponent },
-
-    // ------------- After Authenticate ------------------
-    { path: 'Home', component: HomeComponent  },
-    { path: 'Service', component: ServiceComponent },
+  //{ path: '*', redirectTo: 'Login'},
+  { path: 'Login', component: LoginComponent, canActivate: [AuthServ] },
+        // ------------- After Authenticate ------------------
+        { path: 'Home', component: HomeComponent, canActivate: [AuthGuard]  },
+        { path: 'Service', component: ServiceComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
-})
+})  
 export class AppRoutingModule { } 

@@ -16,7 +16,6 @@ export class AuthGuard implements CanActivate {
         }
 
     private subscriptions: Subscription[] = [];
-
     ngOnDestroy() {
         this.subscriptions.forEach(s => s.unsubscribe());
     }
@@ -24,16 +23,17 @@ export class AuthGuard implements CanActivate {
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean {
-            let currentUser;
-            currentUser  = (sessionStorage.getItem('currentUser'));
-            if(currentUser != null){
-                alert(1);
-                return true;
-            }else{
-                alert(2);
-                return false;
-            }
-      }
+        let currentUser;
+        currentUser  = (sessionStorage.getItem('currentUser'));
+        
+        if(currentUser != null){
+            console.log('Auth guard return home');
+            return true;
+        }else{
+            console.log('Auth guard return login');
+            this.router.navigate(['/Login']);
+        }
+    }
 
     canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         let currentUser;
@@ -41,7 +41,7 @@ export class AuthGuard implements CanActivate {
         if(currentUser != null){
             return true;
         }else{
-            return false;
+            this.router.navigate(['/Login']);
         }
     }
 }
