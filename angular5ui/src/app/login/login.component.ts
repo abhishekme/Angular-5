@@ -21,12 +21,18 @@ export class LoginComponent implements OnInit {
 
     public loginForm:any = {};
     private subscriptions: Subscription[] = [];
-
+    private errDialog:boolean = false;
+    private dialogText:string;
+    private dialogTitle:string;
     ngOnInit() {
         this.loginForm['username'] = '';
         this.loginForm['password'] = '';
         //Auth check redirect
         this.authServ.authCheck();
+    }
+
+    closeDialog(){
+      this.errDialog = false;
     }
 
     loginSubmit(formObj){
@@ -45,6 +51,9 @@ export class LoginComponent implements OnInit {
                       this.router.navigateByUrl('/Home');
                     } 
                     if(!data.status){
+                      this.errDialog  = true;
+                      this.dialogTitle = "Login Error";
+                      this.dialogText = data.message;
                     }
                 },
                 err => { console.log(this.dictionary.loginError, err.message); }

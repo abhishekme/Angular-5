@@ -13,6 +13,11 @@ import { DatabaseService } from './services/database.service';
 import { DictionaryService } from './services/dictionary.service';
 import { AuthService as AuthServ } from './services/auth.service.service';
 import { ServiceComponent } from './service/service.component';
+import { InputsModule } from '@progress/kendo-angular-inputs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogModule } from '@progress/kendo-angular-dialog';
+
+
 
 @NgModule({
   declarations: [
@@ -23,9 +28,12 @@ import { ServiceComponent } from './service/service.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    InputsModule,
+    DialogModule,
   ],
   exports:[
     FormsModule
