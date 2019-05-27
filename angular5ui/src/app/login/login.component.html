@@ -40,7 +40,7 @@
 </div> -->
 
 <h1 class="text-center mt-5">Application Login</h1>
-<div class="container pt-3">
+<div class="container login-container">
   <div class="row justify-content-sm-center">
     <div class="col-sm-10 col-md-6">
       <div class="card border-info">
@@ -55,7 +55,7 @@
                 <form #f="ngForm" (ngSubmit)="loginSubmit(f)" novalidate>
                 <input type="text" kendoTextBox class="form-control mb-2" placeholder="Username" [(ngModel)]="loginForm.username" #email="ngModel" id="username" name="username" class="form-control" required>
                 <input type="password" kendoTextBox class="form-control mb-2" [(ngModel)]="loginForm.password" placeholder="Password"  name = "password" required>
-                <button type="button" kendoButton  class="k-button k-primary mb-1" type="submit">Login</button>
+                <button type="button" [disabled]="loginError" kendoButton  class="k-button k-primary mb-1" type="submit">Login</button>
               </form>
             </div>
           </div>
@@ -64,14 +64,15 @@
     </div>
   </div>
 
-  <kendo-dialog>
+  <simple-notifications [options]="options"></simple-notifications>
+  <!-- <ngx-smart-modal #errDialog (close)="errDialog.close()" identifier="errObject">      
       <kendo-dialog-titlebar>
         <div style="font-size: 18px; line-height: 1.3em;">
-          {{dialogTitle}}
+          <span class="k-icon k-i-print"></span> {{errObject.dialogTitle}}
         </div>
       </kendo-dialog-titlebar>
-      <p style="margin: 30px; text-align: center;">{{dialogText}}</p>
-  </kendo-dialog>
+        <p style="margin: 30px; text-align: center;">{{errObject.dialogText}}</p>
+    </ngx-smart-modal> -->  
 </div>
 
 <!-- <kendo-dialog class="smallDialogBox" title="{{dialogTitle}}" *ngIf="errDialog" (close)="closeDialog()" [ngStyle]="{'min-width' : '250px', 'width' : '450px'}">

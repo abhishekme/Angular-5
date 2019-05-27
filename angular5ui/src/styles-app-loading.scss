@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+
+.app-loading {
+    .logo {
+      width: 100px;
+      height: 100px;
+      
+      // this way asset gets processed by webpack 
+      background: url(./assets/other-media/loading-spinner.gif) center center no-repeat; 
+    }
+  }
+  

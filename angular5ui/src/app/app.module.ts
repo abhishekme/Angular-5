@@ -16,7 +16,13 @@ import { ServiceComponent } from './service/service.component';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogModule } from '@progress/kendo-angular-dialog';
+import { ButtonsModule } from '@progress/kendo-angular-buttons';
 
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { SidebarComponent } from './includes/sidebar/sidebar.component';
+import { FooterComponent } from './includes/footer/footer.component';
+import { HeaderComponent } from './includes/header/header.component';
+import { LayoutComponent } from './includes/layout/layout.component';
 
 
 @NgModule({
@@ -25,6 +31,10 @@ import { DialogModule } from '@progress/kendo-angular-dialog';
     HomeComponent,
     LoginComponent,
     ServiceComponent,
+    SidebarComponent,
+    FooterComponent,
+    HeaderComponent,
+    LayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +44,8 @@ import { DialogModule } from '@progress/kendo-angular-dialog';
     FormsModule,
     InputsModule,
     DialogModule,
+    ButtonsModule,
+    SimpleNotificationsModule.forRoot(),
   ],
   exports:[
     FormsModule

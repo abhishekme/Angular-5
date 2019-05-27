@@ -5,6 +5,7 @@ import { DictionaryService } from '../services/dictionary.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService as AuthServ } from './../services/auth.service.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private database: DatabaseService,
               private dictionary: DictionaryService,
-              private authServ: AuthServ, 
+              private authServ: AuthServ,
+              private _notif_service: NotificationsService, 
               private router: Router) { }
 
 
@@ -24,6 +26,12 @@ export class LoginComponent implements OnInit {
     private errDialog:boolean = false;
     private dialogText:string;
     private dialogTitle:string;
+    public options = {
+      position: ["right", "top"],
+      timeOut: 5000,
+      lastOnBottom: true
+    }
+    private loginError: boolean = false;
     ngOnInit() {
         this.loginForm['username'] = '';
         this.loginForm['password'] = '';
@@ -47,13 +55,26 @@ export class LoginComponent implements OnInit {
                         token:  data.loginToken
                       }
                       sessionStorage.setItem('currentUser',JSON.stringify(currentUser));
-                      console.log('login redirecting');
                       this.router.navigateByUrl('/Home');
                     } 
                     if(!data.status){
+                      this.loginError = true;
                       this.errDialog  = true;
                       this.dialogTitle = "Login Error";
                       this.dialogText = data.message;
+                        setTimeout(() => {
+                          this.loginError = false;
+                        }, 2000);
+                        this._notif_service.error(
+                            this.dialogTitle,
+                            this.dialogText,
+                        {
+                            timeOut: 2000,
+                            showProgressBar: true,
+                            pauseOnHover: false,
+                            clickToClose: false,
+                            maxLength: 0
+                        });
                     }
                 },
                 err => { console.log(this.dictionary.loginError, err.message); }

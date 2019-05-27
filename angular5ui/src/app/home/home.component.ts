@@ -12,7 +12,6 @@ export class HomeComponent {
   constructor(private router: Router, private _authServ: AuthServ) { }
 
   onInit() { 
-    alert('Home');
     //this._authServ.authCheck();
   }
   logOut(){
