@@ -23,6 +23,7 @@ import { SidebarComponent } from './includes/sidebar/sidebar.component';
 import { FooterComponent } from './includes/footer/footer.component';
 import { HeaderComponent } from './includes/header/header.component';
 import { LayoutComponent } from './includes/layout/layout.component';
+import { NotificationModule } from '@progress/kendo-angular-notification';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { LayoutComponent } from './includes/layout/layout.component';
     InputsModule,
     DialogModule,
     ButtonsModule,
+    NotificationModule,
     SimpleNotificationsModule.forRoot(),
   ],
   exports:[

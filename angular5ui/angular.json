@@ -27,12 +27,18 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "styles-app-loading.scss"
+              {
+                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
+              },
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
 
+              "src/assets/admin-theme/css/elegant-icons-style.css",
+              "src/assets/admin-theme/css/font-awesome.css",
+              "src/assets/admin-theme/css/nice-style.css",
+              "src/assets/admin-theme/css/style-responsive.css"
             ],
             "scripts": [],
-            "es5BrowserSupport": true  
+            "es5BrowserSupport": true
           },
           "configurations": {
             "production": {

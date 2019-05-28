@@ -10,14 +10,14 @@ import { ServiceComponent } from './service/service.component';
 const routes: Routes = [
   { path: '', redirectTo: 'Login', pathMatch: 'full' },
   //{ path: '*', redirectTo: 'Login'},
-  { path: 'Login', component: LoginComponent, canActivate: [AuthServ] },
+  { path: 'Login', component: LoginComponent, canActivate: [AuthServ]},
         // ------------- After Authenticate ------------------
-        { path: 'Home', component: HomeComponent, canActivate: [AuthGuard]  },
-        { path: 'Service', component: ServiceComponent, canActivate: [AuthGuard] },
+        { path: 'Home', component: HomeComponent, canActivate: [AuthGuard], runGuardsAndResolvers: 'always'  },
+        { path: 'Service', component: ServiceComponent, canActivate: [AuthGuard], runGuardsAndResolvers: 'always' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })  
 export class AppRoutingModule { } 

@@ -1,3 +1,12 @@
-<p>
-  layout works!
-</p>
+<ng-container *ngIf="!showHead">
+  <app-login [userData]="logData" *ngIf="loginSec"></app-login>
+</ng-container>
+<ng-container *ngIf="showHead">
+  <div class="container">
+      <app-header *ngIf="showHead"></app-header>
+          <div class="section">
+              <router-outlet [hidden]="loading"></router-outlet>
+          </div>
+      <app-footer *ngIf="showHead"></app-footer> 
+  </div>
+</ng-container>

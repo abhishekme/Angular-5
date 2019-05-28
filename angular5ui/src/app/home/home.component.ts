@@ -16,7 +16,8 @@ export class HomeComponent {
   }
   logOut(){
     sessionStorage.removeItem('currentUser');
-    this.router.navigate(['/Login']);
+    //this.router.navigateByUrl('/Login');
+    top.location.href = '/Login';
   }
 
 }
