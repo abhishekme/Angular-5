@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
 
 import { DatabaseService } from '../services/database.service';
 import { DictionaryService } from '../services/dictionary.service';
@@ -40,13 +40,14 @@ export class LoginComponent implements OnInit {
       lastOnBottom: true
     }
     private loginError: boolean = false;
+    private filipClass:string;
+    private timeText:string;
     ngOnInit() {
         this.loginForm['username'] = '';
         this.loginForm['password'] = '';
-        //Auth check redirect
-        this.authServ.authCheck();
     }
-
+    ngAfterViewInit(){
+    }
     closeDialog(){
       this.errDialog = false;
     }
@@ -62,10 +63,7 @@ export class LoginComponent implements OnInit {
                         userId: data.user_id,
                         token:  data.loginToken
                       }
-                      
                       sessionStorage.setItem('currentUser',JSON.stringify(currentUser));
-                      //alert('login...');
-                      //this.onClose.emit(JSON.stringify(currentUser));
                       this.userData = JSON.stringify(currentUser);
                       this.router.navigate(['/Home']);
                     } 
@@ -73,20 +71,6 @@ export class LoginComponent implements OnInit {
                       this.loginError = true;
                       this.errDialog  = true;
                       this.dialogTitle = "Login Error";
-                      this.dialogText = data.message;
-                        setTimeout(() => {
-                          this.loginError = false;   
-                        }, 6000);
-                        /*this._notif_service.error(
-                            this.dialogTitle,
-                            this.dialogText,
-                        {
-                            timeOut: 2000,
-                            showProgressBar: true,
-                            pauseOnHover: false,
-                            clickToClose: false,
-                            maxLength: 0
-                        });*/
                         this.notificationService.show({
                           content: this.dialogText,
                           cssClass: 'login-notification-error',

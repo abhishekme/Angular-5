@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationStart, NavigationEnd, NavigationCancel } from '@angular/router';
 import { AuthService as AuthServ } from '../../services/auth.service.service';
 
+
+
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -14,15 +16,24 @@ export class LayoutComponent implements OnInit {
   navigationSubscription:any = [];
   constructor(private router: Router, private route: ActivatedRoute) {
       router.events.forEach((event) => {
+        let currentUser;
+        currentUser  = JSON.parse(sessionStorage.getItem('currentUser'));
         if (event instanceof NavigationStart) {
-          console.log(event);
           if (event['url'] == '/Login') {
             this.showHead = false;
+            this.loginSec  = true;
           }else if(event['url'] == '/'){
-            top.location.href = '/Login';
+            if(currentUser != null)
+            {
+              this.router.navigate(['/Home']);
+            }else{
+              this.router.navigate(['/Login']);
+            }
           } else {
             this.showHead = true;
           }
+        }else{
+          //Do the needful
         }
       });
       //this.pageLoding = true;
@@ -60,16 +71,6 @@ export class LayoutComponent implements OnInit {
     });
 
   }
-  initialiseInvites(event){
-     console.log('Nav Event:: ',event); 
-     if(event){
-       if(event.urlAfterRedirects != null){
-        alert('redirecting...' + event.urlAfterRedirects);
-       this.router.navigate(event.urlAfterRedirects);
-       }
-       
-     }
-  }
   ngOnDestroy() {
     // avoid memory leaks here by cleaning up after ourselves. If we  
     // don't then we will continue to run our initialiseInvites()   
@@ -79,18 +80,19 @@ export class LayoutComponent implements OnInit {
     }
   }
   ngAfterViewInit() {
-      //Router change application loader
-      
+      //Router change application loader      
   }
   public userData:any;
   private logData:any = [];
   private loginSec:boolean = false;
-  ngOnInit(){
-    
-    this.userData   = sessionStorage.getItem('currentUser');
-    console.log(this.userData);
-    if(this.userData === null){
+  ngOnInit(){    
+    let currentUser = sessionStorage.getItem('currentUser');
+    if(currentUser != null)
+    {
+      this.router.navigate(['/Home']);
+    }else{
       this.loginSec  = true;
+      this.router.navigate(['/Login']);
     }
   }
 }

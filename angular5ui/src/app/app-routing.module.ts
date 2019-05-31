@@ -6,9 +6,9 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard as AuthGuard } from './services/auth.guard.service';
 import { AuthService as AuthServ } from './services/auth.service.service';
 import { ServiceComponent } from './service/service.component';
-
+//redirectTo: 'Login',
 const routes: Routes = [
-  { path: '', redirectTo: 'Login', pathMatch: 'full' },
+  { path: '', component: LoginComponent, canActivate: [AuthServ],pathMatch: 'full' },
   //{ path: '*', redirectTo: 'Login'},
   { path: 'Login', component: LoginComponent, canActivate: [AuthServ]},
         // ------------- After Authenticate ------------------

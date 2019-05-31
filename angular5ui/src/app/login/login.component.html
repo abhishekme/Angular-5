@@ -64,31 +64,118 @@
         </div>
     <simple-notifications [options]="options"></simple-notifications>
 </div> -->
-<div class="login-img3-body">
+<!-- <div class="login-img3-body">   
     <div class="container">
-        <form class="login-form" action="index.html">
+        <form class="login-form" #f="ngForm" (ngSubmit)="loginSubmit(f)" novalidate>
             <div class="login-wrap">
             <p class="login-img"><i class="icon_lock_alt"></i></p>
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon_profile"></i></span>
-                <input type="text" class="form-control" placeholder="Username" autofocus>
+                <input type="text" kendoTextBox class="form-control" placeholder="Username" 
+                [(ngModel)]="loginForm.username" #email="ngModel" id="username" name="username" class="form-control" required>
             </div>
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="password" kendoTextBox class="form-control" [(ngModel)]="loginForm.password" 
+                placeholder="Password"  name = "password" required>
             </div>
-            <label class="checkbox">
-                    <input type="checkbox" value="remember-me"> Remember me
-                    <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
-                </label>
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-            <button class="btn btn-info btn-lg btn-block" type="submit">Signup</button>
+            <button class="btn btn-primary btn-lg btn-block" [disabled]="loginError" type="submit">Login</button>
             </div>
         </form>
     </div>
-</div>
+</div> -->
 
+<!-- <section class="material-half-bg">
+    <div class="cover"></div>
+  </section>
+  <section class="login-content">
+    <div class="logo">
+      <h1>ADMIN</h1>
+    </div>
+    <div class="login-box {{filipClass}}">  
+        
+        <div class="err-login-msg">
+            <span class='err-text'>{{dialogText}}</span>
+        </div>
 
+        <form class="login-form" #f="ngForm" (ngSubmit)="loginSubmit(f)" novalidate>
+            <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
+            <div class="form-group">
+            <label class="control-label">USERNAME  - {{timeText}}</label>
+            <span class="input-group-addon"><i class="icon_profile"></i></span>
+                <input type="text" kendoTextBox class="form-control" placeholder="Username" 
+                    [(ngModel)]="loginForm.username" #email="ngModel" id="username" name="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+            <label class="control-label">PASSWORD</label>
+            <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+                <input type="password" kendoTextBox class="form-control" [(ngModel)]="loginForm.password" 
+                placeholder="Password"  name = "password" required>
+            </div>
+            <div class="form-group">
+            <div class="utility">
+                <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Forgot Password ?</a></p>
+            </div>
+            </div> 
+            <div class="form-group btn-container">
+            <button class="btn btn-primary btn-block" [disabled]="loginError"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+            </div> 
+      </form>
+      <div class="form-group" *ngIf="timeText != '' ">
+            <h3 >{{timeText}}</h3>
+      </div>
+    </div>
+</section> -->
+ <section class="bg-gradient-primary">
+ 
+  <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+    
+          <div class="col-xl-10 col-lg-12 col-md-9">
+    
+            <div class="card o-hidden border-0 shadow-lg my-5">
+              <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                  <!-- <div class="col-lg-6 d-none d-lg-block bg-login-image"></div> -->
+                  <div class="col-lg-6">
+                    <div class="p-5">
+                      <div class="text-center">
+                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                      </div>
+                      <!-- (ngSubmit)="loginSubmit(f)" -->
+                      <form class="login-form" #f="ngForm" novalidate>
+                        <div class="form-group">
+                            <input type="text" kendoTextBox class="form-control form-control-user" placeholder="Username" 
+                                [(ngModel)]="loginForm.username" #email="ngModel" id="username" name="username" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                                <input type="password" kendoTextBox class="form-control form-control-user" [(ngModel)]="loginForm.password" 
+                                placeholder="Password"  name = "password" required>
+                        </div>
+                        <a href="index.html" (click)="loginSubmit(f)" class="btn btn-primary btn-user btn-block">
+                          Login
+                        </a>
+                        <hr>                        
+                      </form>
+                      <hr>
+                      <!-- <div class="text-center">
+                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+          </div>
+    
+        </div>
+    
+      </div>
+    </section>
   <!-- <ngx-smart-modal #errDialog (close)="errDialog.close()" identifier="errObject">      
       <kendo-dialog-titlebar>
         <div style="font-size: 18px; line-height: 1.3em;">

@@ -14,10 +14,6 @@ export class HomeComponent {
   onInit() { 
     //this._authServ.authCheck();
   }
-  logOut(){
-    sessionStorage.removeItem('currentUser');
-    //this.router.navigateByUrl('/Login');
-    top.location.href = '/Login';
-  }
+  
 
 }
