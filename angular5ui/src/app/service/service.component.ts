@@ -12,8 +12,6 @@ export class ServiceComponent implements OnInit {
   constructor(private router: Router,private authServ: AuthServ) { }
 
   ngOnInit() {
-    //Auth check redirect
-    //this.authServ.authCheck();
   }
 
 }

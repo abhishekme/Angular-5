@@ -19,12 +19,20 @@ export class AuthService implements CanActivate {
         
         let currentUser;
         currentUser  = JSON.parse(sessionStorage.getItem('currentUser'));
+        console.log(currentUser);
+        /*if(currentUser != null)
+        {
+            this.router.navigate(['/Home']);
+            return false;
+        }else{
+            return true;
+        }*/
         if(currentUser != null)
         {
             this.router.navigate(['/Home']);
-        }else{
-            return true;
+            return false;
         }
+        return true;
     }
     
     authCheck(){

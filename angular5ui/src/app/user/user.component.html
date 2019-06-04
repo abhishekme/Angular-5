@@ -1,0 +1,101 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <h1 class="h3 mb-4 text-gray-800">User Page</h1>
+  <span>
+    {{pagedGItems | json}}
+  </span>
+
+
+  <!-- <kendo-grid [data]="gridView" [height]="1010"
+                [skip]="skip"
+                [sortable]="{
+                  allowUnsort: allowUnsort,
+                  mode: multiple ? 'multiple' : 'single'
+                  }"
+                [sort]="sort"
+                (sortChange)="sortChange($event)"
+                [pageable]="{
+                  buttonCount: buttonCount,
+                  info: info,
+                  type: type,
+                  pageSizes: true,
+                  previousNext: true
+                }"                
+                [pageSize]="pageSize"
+                [selectable]="true"
+                (selectionChange)="gridRowSelected($event)"
+                (pageChange)="pageChange($event)">
+
+                  <ng-template kendoGridToolbarTemplate>
+                    <ng-container *ngFor="let icon of toolbarIcons">
+                      <span>
+                          <button kendoButton [disabled]="icon.disabled" [style.color]="setIconColor(icon)" (click)="setIconClick(icon)">
+                             <i [ngClass]="icon.class"></i>
+                          </button>&nbsp;
+                      </span>
+                    </ng-container>
+                  </ng-template>
+                  <kendo-grid-column field="username" title="Username" width="40">
+                  </kendo-grid-column>
+                  <kendo-grid-column field="first_name" title="First Name" width="60">
+                  </kendo-grid-column>
+                  <kendo-grid-column field="last_name" title="Last Name" width="60">
+                  </kendo-grid-column>
+                  <kendo-grid-column field="email" title="Email" width="75">
+                  </kendo-grid-column>
+              </kendo-grid> -->
+              <hr>
+
+              <table class="lessons-table mat-elevation-z8" mat-table [dataSource]="listData">
+                    <ng-container matColumnDef="first_name">
+                      <th mat-header-cell *matHeaderCellDef> First Name </th>
+                      <td mat-cell *matCellDef="let row"> {{row.first_name}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="last_name">
+                        <div *matHeaderCellDef>Last Name</div>
+                        <div *matCellDef="let row">{{row.last_name}}</div>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </table>
+              <!-- <mat-table class="lessons-table mat-elevation-z8" [dataSource]="listData">
+                
+                  <ng-container matColumnDef="first_name">
+                      <div *matHeaderCellDef>First Name</div>
+                      <div *matCellDef="let row">{{row.first_name}}</div>
+                  </ng-container>
+                  <ng-container matColumnDef="last_name">
+                      <div *matHeaderCellDef>Last Name</div>
+                      <div *matCellDef="let row">{{row.last_name}}</div>
+                  </ng-container>
+                  
+                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table> -->
+
+              <!-- <mat-table class="lessons-table mat-elevation-z8" [dataSource]="listData">
+                  <ng-container matColumnDef="first">
+                      <th mat-header-cell *matHeaderCellDef>First</th>
+                      <td mat-cell *matCellDef="let row"> {{row.first_name}} </td>
+                  </ng-container> -->
+                  <!-- <ng-container matColumnDef="first_name">
+                    <div *matHeaderCellDef>First Name</div>
+                    <div *matCellDef="let row">{{row.first_name}}</div>
+                </ng-container> -->
+              
+                <!-- <ng-container matColumnDef="last_name">
+                    <div *matHeaderCellDef>Last Name</div>
+                    <div class="description-cell"
+                              *matCellDef="let row">{{row.last_name}}</div>
+                </ng-container>
+              
+                <ng-container matColumnDef="email">
+                    <div *matHeaderCellDef>Email</div>
+                    <div class="duration-cell"
+                              *matCellDef="let row">{{row.email}}</div>
+                </ng-container>-->
+            <!-- </mat-table> -->
+
+
+</div>

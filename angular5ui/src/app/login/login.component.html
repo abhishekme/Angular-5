@@ -126,7 +126,7 @@
       </div>
     </div>
 </section> -->
- <section class="bg-gradient-primary">
+ <section class="bg-gradient primary">
  
   <div class="container">
 
@@ -145,22 +145,25 @@
                       <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                       </div>
+                      <div class="text-center login-notification-error" *ngIf="loginError">
+                          <h6>{{errorMessg}}</h6> 
+                      </div>
                       <!-- (ngSubmit)="loginSubmit(f)" -->
                       <form class="login-form" #f="ngForm" novalidate>
                         <div class="form-group">
                             <input type="text" kendoTextBox class="form-control form-control-user" placeholder="Username" 
-                                [(ngModel)]="loginForm.username" #email="ngModel" id="username" name="username" class="form-control" required>
+                                [(ngModel)]="loginForm.username" #email="ngModel" name="username" class="form-control" required="true">
                         </div>
                         <div class="form-group">
                                 <input type="password" kendoTextBox class="form-control form-control-user" [(ngModel)]="loginForm.password" 
-                                placeholder="Password"  name = "password" required>
+                                placeholder="Password"  name = "password" required="true">
                         </div>
-                        <a href="index.html" (click)="loginSubmit(f)" class="btn btn-primary btn-user btn-block">
+                        <div class="col-xs-12 col-sm-6 col-lg-3 example-col">
+                        <a href="javascript:void(0)" (click)="loginSubmit(f)" kendoButton class="btn btn-primary">
                           Login
-                        </a>
+                        </a></div>
                         <hr>                        
                       </form>
-                      <hr>
                       <!-- <div class="text-center">
                         <a class="small" href="forgot-password.html">Forgot Password?</a>
                       </div> -->
@@ -169,48 +172,8 @@
                 </div>
               </div>
             </div>
-    
           </div>
-    
         </div>
-    
       </div>
     </section>
-  <!-- <ngx-smart-modal #errDialog (close)="errDialog.close()" identifier="errObject">      
-      <kendo-dialog-titlebar>
-        <div style="font-size: 18px; line-height: 1.3em;">
-          <span class="k-icon k-i-print"></span> {{errObject.dialogTitle}}
-        </div>
-      </kendo-dialog-titlebar>
-        <p style="margin: 30px; text-align: center;">{{errObject.dialogText}}</p>
-    </ngx-smart-modal> -->  
-
-
-<!-- <kendo-dialog class="smallDialogBox" title="{{dialogTitle}}" *ngIf="errDialog" (close)="closeDialog()" [ngStyle]="{'min-width' : '250px', 'width' : '450px'}">
-    <button type="button" class="close" aria-label="Close" (click)="closeDialog()">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    <p [ngStyle]="{'margin' : '30px', 'text-align' : 'center'}">{{dialogText}}</p>
-</kendo-dialog> -->
-
-
-
-
-
-
-<!-- <div class="login-form">
-  <form #f="ngForm" (ngSubmit)="loginSubmit(f)" novalidate>
-    <div class="form-group">
-      <label for="email">Username:</label>
-      {{loginForm.username}}
-      <input type="text" [(ngModel)]="loginForm.username" #email="ngModel" id="username" name="username" class="form-control" required>
-    </div>
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" [(ngModel)]="loginForm.password"  name = "password" required>
-    </div>
-    #{{email.invalid}}
-    <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
-  </form>
-</div> -->
 

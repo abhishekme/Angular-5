@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
     private errDialog:boolean = false;
     private dialogText:string;
     private dialogTitle:string;
+    private errorMessg:string;
     public options = {
       position: ["right", "top"],
       timeOut: 5000,
@@ -45,6 +46,7 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         this.loginForm['username'] = '';
         this.loginForm['password'] = '';
+        this.errorMessg = '';
     }
     ngAfterViewInit(){
     }
@@ -70,6 +72,12 @@ export class LoginComponent implements OnInit {
                     if(!data.status){
                       this.loginError = true;
                       this.errDialog  = true;
+                      this.dialogText = data.message;
+                      this.errorMessg = data.message;
+                      setTimeout(function(){
+                        this.errorMessg = '';
+                      },2000);
+
                       this.dialogTitle = "Login Error";
                         this.notificationService.show({
                           content: this.dialogText,

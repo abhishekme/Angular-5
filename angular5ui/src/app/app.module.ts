@@ -24,10 +24,21 @@ import { FooterComponent } from './includes/footer/footer.component';
 import { HeaderComponent } from './includes/header/header.component';
 import { LayoutComponent } from './includes/layout/layout.component';
 import { NotificationModule } from '@progress/kendo-angular-notification';
+import { UserComponent } from './user/user.component';
+import { DataFormComponent } from './user/data-form/data-form.component';
 
+import { GridModule } from '@progress/kendo-angular-grid';
+
+import {
+  MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
+  MatToolbarModule, MatMenuModule,MatIconModule, MatProgressSpinnerModule
+} from '@angular/material';
+import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 
 @NgModule({
-  declarations: [
+  declarations: [ 
     AppComponent,
     HomeComponent,
     LoginComponent,
@@ -36,6 +47,8 @@ import { NotificationModule } from '@progress/kendo-angular-notification';
     FooterComponent,
     HeaderComponent,
     LayoutComponent,
+    UserComponent,
+    DataFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,13 +59,29 @@ import { NotificationModule } from '@progress/kendo-angular-notification';
     InputsModule,
     DialogModule,
     ButtonsModule,
+    GridModule,
+    ExcelExportModule,
+    DropDownsModule,
+    DateInputsModule,
     NotificationModule,
+
+    MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatInputModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+
     SimpleNotificationsModule.forRoot(),
   ],
   exports:[
     FormsModule
   ],
-  providers: [AuthGuard,AuthServ, DatabaseService, DictionaryService, HttpClient],
+  providers: [AuthGuard, AuthServ, DatabaseService, DictionaryService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -27,7 +27,11 @@ $minHeight: 700px;
 
 //---------------- Component Css -----------------
 .login-notification-error {
-    display: inline-block;
     white-space: normal;
     vertical-align: top;
+    color: #f44336;
+}
+.k-textbox.ng-invalid{
+    color: red;
+    border: 1px solid;
 }

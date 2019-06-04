@@ -25,14 +25,24 @@ export class AuthGuard implements CanActivate {
         state: RouterStateSnapshot): boolean {
         let currentUser;
         currentUser  = (sessionStorage.getItem('currentUser'));
-        
-        if(currentUser != null){
+        console.log(currentUser);
+
+        if(currentUser == null){
+            this.router.navigate(['/Login']);
+            return false;
+        }
+        return true;
+
+        /*if(currentUser != null){
+            alert('AUth guard...1');
             console.log('Auth guard return home');
             return true;
         }else{
+            alert('AUth guard...2');
             console.log('Auth guard return login');
             this.router.navigate(['/Login']);
-        }
+            return false;
+        }*/
     }
 
     canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
@@ -42,6 +52,7 @@ export class AuthGuard implements CanActivate {
             return true;
         }else{
             this.router.navigate(['/Login']);
+            return false;
         }
     }
 }
