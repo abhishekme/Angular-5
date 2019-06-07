@@ -27,7 +27,16 @@ import { NotificationModule } from '@progress/kendo-angular-notification';
 import { UserComponent } from './user/user.component';
 import { DataFormComponent } from './user/data-form/data-form.component';
 
-import { GridModule } from '@progress/kendo-angular-grid';
+//import { GridModule } from '@progress/kendo-angular-grid';
+//import { AgGridModule } from 'ag-grid-angular';
+import { UserFilterPipe } from './utilities/filter/user.pipe';
+
+import { DataGrid } from './shared/datagrid/datagrid.component';
+//import { DataGridUtil } from './shared/datagrid/datagrid.util';
+import { Format } from './shared/datagrid/format';
+import { OrderBy } from './shared/datagrid/orderby';
+import { SearchComponent } from './shared/search.component';
+
 
 import {
   MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
@@ -49,17 +58,23 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
     LayoutComponent,
     UserComponent,
     DataFormComponent,
+    UserFilterPipe,
+    DataGrid,
+   // DataGridUtil,
+    Format,
+    OrderBy,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    //AgGridModule.withComponents([]),
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     InputsModule,
     DialogModule,
     ButtonsModule,
-    GridModule,
     ExcelExportModule,
     DropDownsModule,
     DateInputsModule,

@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatabaseService } from '../services/database.service';
 import { PagerService } from '../services/paging/pager.service';
 import { User } from '../models/user/user';
 import { Subscription } from 'rxjs';
+import { AgGridAngular } from 'ag-grid-angular';
+import { HttpClient } from '@angular/common/http';
+import { DBOperation } from '../shared/enum';
+
+import { UserFilterPipe } from '../utilities/filter/user.pipe';
 
 @Component({
   selector: 'app-user',
@@ -30,10 +35,79 @@ export class UserComponent {
 
   private subscriptions: Subscription[] = [];
   public displayedColumns = ['first_name', 'last_name'];
+  public columnDefs:any; public rowData:any;
 
-  constructor(private service: DatabaseService, private objPager: PagerService,) {
+  @ViewChild('agGrid') agGrid: AgGridAngular;
 
-    this.userModel = new User();
+    msg: string;
+    dbops: DBOperation;
+    modalTitle: string;
+    modalBtnTitle: string;
+    isREADONLY: boolean = false;
+    exportFileName: string = "Users_";
+    users:any = [];
+    //Grid Vars start
+    columns: any[] = [
+        {
+            display: 'First Name',
+            variable: 'FirstName',
+            filter: 'text',
+        },
+        {
+            display: 'Last Name',
+            variable: 'LastName',
+            filter: 'text'
+        },
+        {
+            display: 'Gender',
+            variable: 'Gender',
+            filter: 'text'
+        },
+        {
+            display: 'Date of Birth',
+            variable: 'DOB',
+            filter: 'date'
+        }
+    ];
+    sorting: any = {
+        column: 'FirstName',
+        descending: false
+    };
+    /**/
+    hdrbtns: any[] = [];
+    gridbtns: any[] = [];
+    initGridButton() {
+
+        this.hdrbtns = [
+            {
+                title: 'Add',
+                keys: [''],
+                action: DBOperation.create,
+                ishide: this.isREADONLY
+
+            }];
+        this.gridbtns = [
+            {
+                title: 'Edit',
+                keys: ['Id'],
+                action: DBOperation.update,
+                ishide: this.isREADONLY
+            },
+            {
+                title: 'X',
+                keys: ["Id"],
+                action: DBOperation.delete,
+                ishide: this.isREADONLY
+            }
+
+        ];
+
+    }
+    //Grid Vars end
+
+  constructor(private service: DatabaseService, private objPager: PagerService, private http:HttpClient) {
+    
+    //this.userModel = new User();
     //this.path   = new Path();
     // this._alertMesg = new AlertMessages();
     //this.imagePath  = this.path.API_IMAGE_PATH;
@@ -47,6 +121,36 @@ export class UserComponent {
     //this.messageStatus = false;
 
    }
+   ngAfterViewInit(){
+     
+      this.users = [
+        {
+          FirstName: 'Abhishek',
+          LastName:'Das',
+          Gender:'M'
+        },
+        {
+          FirstName: 'Chaitali',
+          LastName:'Das',
+          Gender:'M'
+        },
+        {
+          FirstName: 'Tamal',
+          LastName:'Das',
+          Gender:'M'
+        },
+        {
+          FirstName: 'Rupam',
+          LastName:'Das',
+          Gender:'M'
+        },
+        {
+          FirstName: 'Kaustav',
+          LastName:'Das',
+          Gender:'M'
+        },
+      ];
+   }
    ngOnDestroy() {
 		this.subscriptions.forEach(s => s.unsubscribe());
     }
@@ -55,10 +159,38 @@ export class UserComponent {
     this.getTotalData(this.srchKey);
     this.getListData(this.pageNum, this.limitNum, this.srchKey, '');
 
-    this.tableHeader.push('Lession');
-    this.tableHeader.push('Lession');
-    this.tableHeader.push('Lession');
+
+    
+
+
+    /*this.columnDefs = [
+      //{headerName: 'Make', field: 'make', width: 90, sortable: true, checkboxSelection: true },
+      {headerName: "Make", field: "athlete", width: 150,
+        checkboxSelection: function (params) {
+            // we put checkbox on the name if we are not doing grouping
+            return params.columnApi.getRowGroupColumns().length === 0;
+        },
+        headerCheckboxSelection: function (params) {
+            // we put checkbox on the name if we are not doing grouping
+            return params.columnApi.getRowGroupColumns().length === 0;
+        }
+    },
+      {headerName: 'Model', field: 'model' },
+      {headerName: 'Price', field: 'price'}
+    ];
+    this.rowData = [
+        { make: 'Toyota', model: 'Celica', price: 35000 },
+        { make: 'Ford', model: 'Mondeo', price: 32000 },
+        { make: 'Porsche', model: 'Boxter', price: 72000 }
+    ];*/
   }
+
+  getSelectedRows() {
+    const selectedNodes = this.agGrid.api.getSelectedNodes();
+    const selectedData = selectedNodes.map( node => node.data );
+    const selectedDataStringPresentation = selectedData.map( node => node.make + ' ' + node.model).join(', ');
+    alert(`Selected nodes: ${selectedDataStringPresentation}`);
+}
 
   getTotalData(srchKey){
 

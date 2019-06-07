@@ -2,10 +2,6 @@
 <div class="container-fluid">
   <!-- Page Heading -->
   <h1 class="h3 mb-4 text-gray-800">User Page</h1>
-  <span>
-    {{pagedGItems | json}}
-  </span>
-
 
   <!-- <kendo-grid [data]="gridView" [height]="1010"
                 [skip]="skip"
@@ -47,7 +43,7 @@
               </kendo-grid> -->
               <hr>
 
-              <table class="lessons-table mat-elevation-z8" mat-table [dataSource]="listData">
+              <!-- <table class="lessons-table mat-elevation-z8" mat-table [dataSource]="listData">
                     <ng-container matColumnDef="first_name">
                       <th mat-header-cell *matHeaderCellDef> First Name </th>
                       <td mat-cell *matCellDef="let row"> {{row.first_name}} </td>
@@ -58,7 +54,7 @@
                     </ng-container>
                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                </table>
+                </table> -->
               <!-- <mat-table class="lessons-table mat-elevation-z8" [dataSource]="listData">
                 
                   <ng-container matColumnDef="first_name">
@@ -97,5 +93,24 @@
                 </ng-container>-->
             <!-- </mat-table> -->
 
-
+            <!-- <ag-grid-angular 
+            style="width: 550; height: 500px;"
+            class="ag-theme-balham"
+            [rowData]="rowData" 
+            rowSelection="multiple"
+            [columnDefs]="columnDefs">
+            </ag-grid-angular> -->
+            {{users | json}}
+            <data-grid 
+                 [columns]="columns"
+                 [data]="users"
+                 [gridbtns]="gridbtns"
+                 [hdrbtns]="hdrbtns"
+                 [sort]="sorting"
+                 [isshowfilter]=true
+                 [isExporttoCSV]=false
+                 [exportFileName]="exportFileName"
+                 [filter] = userfilter
+                 (btnclick)="gridaction($event)">
+            </data-grid>
 </div>
