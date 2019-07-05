@@ -1,4 +1,4 @@
-﻿.table-sortable > thead > tr > th {
+﻿/* .table-sortable > thead > tr > th {
     cursor: pointer;
     position: relative;
     background-image: none;
@@ -29,4 +29,11 @@
 .table-btn {
     background-color: #428bca;
     color: white;
+} */
+.pagination {
+    li .active {
+        display: block;
+        background-color: aqua;
+        color: brown;
+    }
 }

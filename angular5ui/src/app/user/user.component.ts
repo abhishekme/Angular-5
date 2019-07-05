@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatabaseService } from '../services/database.service';
+import { DictionaryService } from '../services/dictionary.service';
 import { PagerService } from '../services/paging/pager.service';
 import { User } from '../models/user/user';
 import { Subscription } from 'rxjs';
@@ -17,13 +18,14 @@ import { UserFilterPipe } from '../utilities/filter/user.pipe';
 })
 export class UserComponent {
   public listData: any = [];
+  public totalListData:any = [];
   public totalData: any;
   public adminLimit: number;
   public pageNum: number = 0;
   public totalPages: number;
   public limitNum: number = 5;
   public srchKey: any;
-  public totalRec: any;
+  public totalRec: any = 0;
   public sortByField: string;
   public sortByDir: string;
 
@@ -49,31 +51,38 @@ export class UserComponent {
     //Grid Vars start
     columns: any[] = [
         {
-            display: 'First Name',
-            variable: 'FirstName',
-            filter: 'text',
+            title: 'First Name',
+            field: 'first_name',
+            width:150,
         },
         {
-            display: 'Last Name',
-            variable: 'LastName',
-            filter: 'text'
+            title: 'Last Name',
+            field: 'last_name',
+            width:150,
         },
         {
-            display: 'Gender',
-            variable: 'Gender',
-            filter: 'text'
+            title: 'Username',
+            field: 'username',
+            width:200,
         },
         {
-            display: 'Date of Birth',
-            variable: 'DOB',
-            filter: 'date'
+            title: 'Email',
+            field: 'email',
+            width:250,
+        }
+    ];
+    sort: any[] = [
+        {
+          field:'first_name'
+        },
+        {
+          field:'username'
         }
     ];
     sorting: any = {
-        column: 'FirstName',
-        descending: false
+        column: 'first_name',
+        descending: true
     };
-    /**/
     hdrbtns: any[] = [];
     gridbtns: any[] = [];
     initGridButton() {
@@ -99,20 +108,19 @@ export class UserComponent {
                 action: DBOperation.delete,
                 ishide: this.isREADONLY
             }
-
         ];
 
     }
     //Grid Vars end
 
-  constructor(private service: DatabaseService, private objPager: PagerService, private http:HttpClient) {
+  constructor(private service: DatabaseService, private dictionary:DictionaryService, private objPager: PagerService, private http:HttpClient) {
     
     //this.userModel = new User();
     //this.path   = new Path();
     // this._alertMesg = new AlertMessages();
     //this.imagePath  = this.path.API_IMAGE_PATH;
     this.pageNum = 1;
-    this.limitNum = 3;
+    this.limitNum = this.dictionary.gridDataLimit;
     //this.sortKey = 'first_name';
     this.sortByField = 'first_name';
     this.sortByDir = 'asc';
@@ -121,6 +129,13 @@ export class UserComponent {
     //this.messageStatus = false;
 
    }
+
+   gridaction(value){
+     console.log('Click Event:: ', value);
+
+   }
+
+
    ngAfterViewInit(){
      
       this.users = [
@@ -156,13 +171,13 @@ export class UserComponent {
     }
   ngOnInit() {
 
-    this.getTotalData(this.srchKey);
-    this.getListData(this.pageNum, this.limitNum, this.srchKey, '');
-
-
+    setTimeout(() => {
+      this.getTotalData(this.srchKey);
+      this.getListData(this.pageNum, this.limitNum, this.srchKey, '');
+    }, 1)
     
-
-
+    //this.initGridButton();
+    
     /*this.columnDefs = [
       //{headerName: 'Make', field: 'make', width: 90, sortable: true, checkboxSelection: true },
       {headerName: "Make", field: "athlete", width: 150,
@@ -189,7 +204,6 @@ export class UserComponent {
     const selectedNodes = this.agGrid.api.getSelectedNodes();
     const selectedData = selectedNodes.map( node => node.data );
     const selectedDataStringPresentation = selectedData.map( node => node.make + ' ' + node.model).join(', ');
-    alert(`Selected nodes: ${selectedDataStringPresentation}`);
 }
 
   getTotalData(srchKey){
@@ -197,18 +211,21 @@ export class UserComponent {
       this.subscriptions.push(this.service.adminGetUserData(srchKey,this.limitNum).subscribe(
               data => {
                 let totalRec = data;
+                console.log(data);
+                //this.totalListData = data;
                 if(totalRec != undefined){
                   if(totalRec){
                       let totalData   = totalRec.totalRecord;
                       this.totalRec   = totalData;
-                      let totalPage   = Math.ceil(totalData / this.limitNum);
+                      /*let totalPage   = Math.ceil(totalData / this.limitNum);
                       this.totalPages = totalPage;
+                      console.log('Total page: ', this.totalPages);
 
                       this.createPages(this.totalPages);
                       //Get Pager services
                       let pagesItems    = this.objPager.getPagesArray(this.totalPages, 2, 1);
                       this.pagedGItems   = pagesItems;
-                      console.log("paged Data: ", this.pagedGItems);
+                      console.log("paged Data: ", this.pagedGItems);*/
                   }
                 }
               }
@@ -230,7 +247,13 @@ export class UserComponent {
     }
   }
 
-  getListData(pageNum:number=0, limitNum:number=this.limitNum, srchKey:string='', queryType:string){
+  getNav(event){
+    console.log('Get Nav: ', event);
+    var pageNum = event;
+    this.getListData(pageNum, this.limitNum, this.srchKey);
+  }
+
+  getListData(pageNum:number=0, limitNum:number=this.limitNum, srchKey:string='', queryType:string=''){
     //, sortByField:string='', sortByDir=''
     this.pageNum = pageNum;
     //this.sortByDir = (sortByDir == 'asc') ? 'desc' : 'asc';
@@ -241,13 +264,21 @@ export class UserComponent {
           this.service.adminUserList(pageNum, limitNum, srchKey, queryType, this.sortByField, this.sortByDir).subscribe(
               data => {
                 this.listData = data.record;
-
+                this.totalListData = data;
                 console.log('#### user list data #######');
-                console.log(data);
+                console.log(data, ' == ',data.record.length, " :: Tot Rec: ",this.totalRec);
+                //let totalData   = data.length;
+                //let totalPage   = Math.ceil(totalData / this.limitNum);
+                //this.totalPages = data.record.length;
+                //console.log('Total page: ', this.totalPages);  
+
+                //let totalData   = data.record;
+                //let totalPage   = Math.ceil(totalData / this.limitNum);
+                //this.totalPages = totalPage;
 
               //Get Pager services
-              let pagesItems    = this.objPager.getPagesArray(this.totalPages, 2, pageNum);
-              this.pagedGItems   = pagesItems;
+              //let pagesItems    = this.objPager.getPagesArray(this.totalPages, 2, pageNum);
+              //this.pagedGItems   = pagesItems;
               }
         ));
   }

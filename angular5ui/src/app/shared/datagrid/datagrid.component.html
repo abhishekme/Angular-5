@@ -12,12 +12,12 @@
 </div>
 
 <div>
-    <table class="table table table-bordered" *ngIf='data ; else loadingScreen;'>
+    <!-- <table class="table table table-bordered" *ngIf='data ; else loadingScreen;'>
         <thead>
             <tr>
-                <th *ngFor="let column of columns" [class]="selectedClass(column.variable)"
-                    (click)="changeSorting(column.variable)">
-                    {{column.display}}
+                <th *ngFor="let column of columns" [class]="selectedClass(column.field)"
+                    (click)="changeSorting(column.field)">
+                    {{column.title}}
                 </th>
                 <ng-container *ngFor="let btn of gridbtns">
                     <td *ngIf="!btn.ishide"></td>
@@ -36,13 +36,184 @@
                 </ng-container>
             </tr>
         </tbody>
-    </table>
-    <div *ngIf='data && data.length==0' class="alert alert-info" role="alert">No record found!</div>
-    <ng-template #loadingScreen>
-        <div class="alert alert-info" role="alert">
-            Loading...
-        </div>
+    </table> -->
+    <!-- [pageSize]="formStyle ? 0 : 50" [pageable]="formStyle ? false : {type: 'input', pageSizes: [50,100,200,300]}"
+        [resizable]="true" [reorderable]="true" [filterable]="filter" [group]="group"
+        [sortable]="{allowUnsort: true, mode: 'multiple'}" (sortChange)="sortChanged($event)"
+        [selectable]="singleSelection ? { mode: 'single' } : { mode: 'multiple'}" (selectionChange)="gridRowSelected($event)"
+        [rowSelected]="isRowSelected" [rowClass]="rowCallback"
+        (cellClick)="cellClickHandler($event)" (cellClose)="cellCloseHandler($event)"
+        (click)="click($event)" (dblclick)="doubleClick($event)"
+        (excelExport)="onExcelExport($event)" [loading]="isLoading()"-->
+        <!-- formStyle ? false : {type: 'input', pageSizes: [5,10,50,100]} -->
+    <!-- <kendo-grid #kendoGrid [kendoGridBinding]="data" 
+    [pageSize]="pageSize"
+    [resizable]="true"  [pageable]="true" [pageSize]="pageSize" [skip]="skip" height="500" scrollable="scrollable"> -->
+
+    <!-- Bootsrap Table -->
+    
+    <div class="card-body">
+            <div class="box">
+              <div class="box-header with-border">
+                <h3 class="box-title"></h3>
+              </div>
+              <!-- /.box-header -->
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <tr>
+                 <ng-container *ngIf="columns.length">
+                    <th *ngFor="let row of columns">
+                        <span>{{row.title}}</span>
+                        <ng-container *ngFor="let rec of sort">
+                            <i class="fa fa-sort-up" *ngIf="rec.field == row.field"></i>
+                            <!-- <i class="fa fa-sort-down" *ngIf="sortByDir==asc"></i> -->
+                        </ng-container>
+                    </th>
+                 </ng-container>
+            <!-- <th>ID</th>
+            <th>
+              <span (click)="listSort('username')" style="cursor:pointer;">
+              Username
+              </span> 
+              <span *ngIf="sortKey == username">
+              <i class="fa fa-sort-up" *ngIf="sortByDir==desc"></i>
+              <i class="fa fa-sort-down" *ngIf="sortByDir==asc"></i>
+              </span>
+              
+            </th>
+            <th>
+              <span (click)="listSort('first_name')" style="cursor:pointer;">
+              First Name</span>
+              <span  *ngIf="sortKey != first_name">
+                <i class="fa fa-sort-up" *ngIf="sortByDir==desc"></i>
+                <i class="fa fa-sort-down" *ngIf="sortByDir==asc"></i>
+              </span>
+              </th>
+            <th (click)="listSort('email')">Email</th>
+            <th>Picture</th> -->
+                <th>Action</th>
+                </tr>
+                  <tr *ngFor="let row of listData">
+                    <td>{{row.id}}</td>
+                    <td>{{row.username}}</td>
+                    <td>
+                      <a href="javascript:void(0);" (click)="getUserInfo(row.id)">
+                      {{row.first_name}}</a></td>
+                    <td>{{row.email}}</td>
+                    <td align="center">
+                      <span *ngIf="row.profile_pic === null">No Image</span>
+                      <!-- {{imagePath}}user/{{row.profile_pic}} -->
+                      <img onError="this.src='./assets/img/no-image.png'" 
+                      *ngIf="row.profile_pic != null" src="" 
+                      [ngStyle]="{'width':'auto','height':'150px','border':'1px solid #ccc','padding':'5px','background-color':'#eee'}">
+                    </td>  
+                    <td>
+                      <a routerLink="/admin/users/edit/{{row.id}}/{{pageNum}}">
+                          <i class="fa fa-edit"></i>
+                      </a> | 
+                      <a (click)="userDelete(row.id)" [ngStyle]="{'cursor':'pointer'}">
+                          <i class="fa fa-trash"></i>
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="5" *ngIf="!listData">No Record(s) Found</td>
+                  </tr>
+                </table>
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer clearfix">                
+                <hr>
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination pg-blue">
+                    <!-- <li class="page-item" [ngClass]="{'disabled' : pageNum <= 1}">
+                      <a class="page-link" tabindex="-1" (click)="getListData((pageNum-1),limitNum, srchKey)">Previous</a>
+                    </li> -->
+                    <li *ngFor="let page of pagedGItems" class="page-item" [ngClass]="{'active': curPage == page.val}">
+                      <a class="page-link" href="javascript:void(0)" (click)="getListData(page.val)" 
+                      *ngIf="page.val != '...'">{{page.val}}</a>
+                      <a class="page-link" href="javascript:void(0)" *ngIf="page.val == '...'">{{page.val}}</a>
+                  </li>
+
+                    <!-- <li class="page-item" [ngClass]="{'disabled' : pageNum >= (totalPages)}">
+                      <a class="page-link" (click)="getListData((pageNum+1),limitNum, srchKey)">Next</a>
+                    </li> -->
+                    <!-- , sortByField, sortByDir -->
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+
+
+
+    <!-- <kendo-grid #kendoGrid
+          [kendoGridBinding]="data"
+          [pageSize]="pageSize"
+          [skip]="skip"
+          [pageable]="true"
+          [height]="400"
+          (cellClick)="cellClickHandler($event)"
+          (selectionChange)="gridRowSelected($event)"
+          (pageChange)="pageChange($event)">
+          <ng-template kendoGridToolbarTemplate *ngIf="!disableHeader">
+            <div class="gridHeader">
+                <div class="icons block">
+                    <ng-container *ngFor="let icon of mainIcons">
+                        <ng-container *ngIf="!icon.menu">
+                            <span>
+                                <button  kendoButton [iconClass]="icon.class" [style.color]="icon.color" ></button>
+                            </span>
+                    </ng-container>
+                       
+                    </ng-container>
+                </div>
+            </div>
+        </ng-template> -->
+            <!-- <ng-container *ngFor="let btn of gridbtns">
+                <span *ngIf="!btn.ishide">
+                    <button type="button" class="btn btn-primary" (click)="click(btn,row)">{{btn.title}}</button>
+                </span>
+            </ng-container> -->
+    <!-- <ng-template kendoGridToolbarTemplate> <button type="button" kendoGridExcelCommand>
+        <span class="k-icon k-i-file-excel"></span>Export to Excel</button> 
     </ng-template>
+    <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+            <span>gfgdf{{rowIndex}}</span>
+    </ng-template> -->
+
+    <!-- <kendo-grid-column title="Custom" width="120">
+        <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+            <button type="button" class="k-button" (click)="showDetails($event, dataItem)">Open Popup</button>
+        </ng-template>
+    </kendo-grid-column> -->
+
+    <!-- <kendo-grid-column *ngFor="let field of columns"
+            field="{{field.field}}"
+            title="{{field.title}}"
+            filter="{{field.filter}}"
+            format="{{field.field}}"
+            editor="{{field.numeric ? numeric : ''}}"
+            [width]="field.width ? field.width : '150'">
+    </kendo-grid-column>
+
+        <kendo-grid-command-column title="command" width="220">
+            <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                <button kendoGridEditCommand class="k-primary">Edit - {{dataItem.id}}</button>
+                <button kendoGridRemoveCommand>Remove</button>
+            </ng-template>
+        </kendo-grid-command-column>
+    </kendo-grid> -->
+
+    <!-- <kendo-grid [data]="data" [height]="410">
+        <kendo-grid-column field="ProductID" title="ID" width="40">
+        </kendo-grid-column>
+        <kendo-grid-column field="ProductName" title="Name" width="250">
+        </kendo-grid-column>
+        <kendo-grid-column field="Category" title="Category">
+        </kendo-grid-column>        
+    </kendo-grid> -->
+
     <!-- <ng-template #loadingScreen>
         <div class="alert alert-info" role="alert">
             <md-progress-spinner mode="indeterminate" style="width:50px; height:50px"></md-progress-spinner>loading...

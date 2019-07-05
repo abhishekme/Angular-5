@@ -20,8 +20,6 @@ export class PagerService {
 
   	//getPagesArray(total_page, each_side, curr_page){
   	getPagesArray(total_page:number=0, each_side:number=2, curr_page:number=0){
-  		//alert('pager :: '+total_page + " ===> " + each_side+ " ====> " +curr_page );
-  		//alert((2*each_side)+5);
   		let outputPages = [];
 
   		if (total_page <= (2*each_side)+5){

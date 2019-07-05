@@ -27,7 +27,7 @@ import { NotificationModule } from '@progress/kendo-angular-notification';
 import { UserComponent } from './user/user.component';
 import { DataFormComponent } from './user/data-form/data-form.component';
 
-//import { GridModule } from '@progress/kendo-angular-grid';
+import { GridModule } from '@progress/kendo-angular-grid';
 //import { AgGridModule } from 'ag-grid-angular';
 import { UserFilterPipe } from './utilities/filter/user.pipe';
 
@@ -36,12 +36,26 @@ import { DataGrid } from './shared/datagrid/datagrid.component';
 import { Format } from './shared/datagrid/format';
 import { OrderBy } from './shared/datagrid/orderby';
 import { SearchComponent } from './shared/search.component';
-
-
+//import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
+//import { MatInputModule } from '@angular/material/input';
+//import { MatMenuModule } from '@angular/material/menu';
+// import { MatProgressBarModule } from '@angular/material/progress-bar';
+// import { MatRadioModule } from '@angular/material/radio';
+// import { MatSidenavModule } from '@angular/material/sidenav';
+// import { MatSnackBarModule } from '@angular/material/snack-bar';
+// import { MatStepperModule } from '@angular/material/stepper';
+// //import { MatToolbarModule } from '@angular/material/toolbar';
+// import { MatTooltipModule } from '@angular/material/tooltip';
 import {
-  MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
-  MatToolbarModule, MatMenuModule,MatIconModule, MatProgressSpinnerModule
+  MatSnackBarModule, MatSidenavModule, MatProgressBarModule, MatListModule, MatCheckboxModule,
+  MatTooltipModule
 } from '@angular/material';
+
+// import {
+//   MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
+//   MatToolbarModule, MatMenuModule,MatIconModule, MatProgressSpinnerModule
+// } from '@angular/material';
 import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
@@ -68,6 +82,7 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    GridModule,
     //AgGridModule.withComponents([]),
     AppRoutingModule,
     HttpClientModule,
@@ -80,7 +95,15 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
     DateInputsModule,
     NotificationModule,
 
-    MatButtonModule,
+    MatSnackBarModule,
+    MatSidenavModule,
+    MatProgressBarModule,
+    MatListModule,
+    MatCheckboxModule,
+    MatTooltipModule,
+
+    /*MatButtonModule,
+    MatTooltipModule,
     MatCardModule,
     MatDialogModule,
     MatButtonModule,
@@ -89,7 +112,7 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
     MatToolbarModule,
     MatMenuModule,
     MatIconModule,
-    MatProgressSpinnerModule,
+    MatProgressSpinnerModule,*/
 
     SimpleNotificationsModule.forRoot(),
   ],

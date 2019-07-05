@@ -100,17 +100,16 @@
             rowSelection="multiple"
             [columnDefs]="columnDefs">
             </ag-grid-angular> -->
-            {{users | json}}
+
             <data-grid 
-                 [columns]="columns"
-                 [data]="users"
-                 [gridbtns]="gridbtns"
-                 [hdrbtns]="hdrbtns"
-                 [sort]="sorting"
-                 [isshowfilter]=true
-                 [isExporttoCSV]=false
-                 [exportFileName]="exportFileName"
-                 [filter] = userfilter
-                 (btnclick)="gridaction($event)">
+              [columns]="columns"
+              [data]="totalListData"
+              [totalPages] = "totalRec"
+              [gridbtns]="gridbtns"
+              [sort]  = "sort"
+              [isshowfilter] = true
+              [isExporttoCSV] = false
+              (pageNav)="getNav($event)"
+              [exportFileName] = "exportFileName"> 
             </data-grid>
 </div>

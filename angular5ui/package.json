@@ -33,7 +33,7 @@
     "@progress/kendo-angular-popup": "^2.0.0",
     "@progress/kendo-data-query": "^1.0.0",
     "@progress/kendo-drawing": "^1.0.0",
-    "@progress/kendo-theme-default": "latest",
+    "@progress/kendo-theme-default": "^3.7.0",
     "@telerik/kendo-theme-default": "^1.33.4",
     "ag-grid-angular": "^21.0.0",
     "ag-grid-community": "^21.0.0",
