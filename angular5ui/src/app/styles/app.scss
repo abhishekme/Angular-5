@@ -1,0 +1,37 @@
+
+// Colors
+$logoColor: #FDC811;
+$primaryColor: #0072c6;
+$secondaryColor: #5aa0f9;
+$darkSecondaryColor: #004795;
+
+$default: black;
+$info: #1976d2;
+$edit:  orange;
+$error: #f44336;
+$insert: #43a047;
+$warning: #ffff00;
+$disabled: lightgrey;
+
+$accentColor: white;
+$borderColor: darkgray;
+$backgroundColor: rgb(245,245,245);
+$gridRowHighlightColor: lightgrey;
+$contentBackgroundColor: whitesmoke;
+
+// Fonts
+$fontSizeOffset: -3px;
+$dialogTitleBarFontSize : 18px;
+$minWidth: 1300px;
+$minHeight: 700px;
+
+//---------------- Component Css -----------------
+.login-notification-error {
+    white-space: normal;
+    vertical-align: top;
+    color: #f44336;
+}
+.k-textbox.ng-invalid{
+    color: red;
+    border: 1px solid;
+}

@@ -1,0 +1,180 @@
+
+<!-- <div class="container login-container">
+    <div class="row">
+        <div class="col-md-6 login-form-1">
+            <h3>Login for Form 1</h3>
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Your Email *" value="" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Your Password *" value="" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btnSubmit" value="Login" />
+                </div>
+                <div class="form-group">
+                    <a href="#" class="ForgetPwd">Forget Password?</a>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 login-form-2">
+            <h3>Login for Form 2</h3>
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Your Email *" value="" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Your Password *" value="" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btnSubmit" value="Login" />
+                </div>
+                <div class="form-group">
+
+                    <a href="#" class="ForgetPwd" value="Login">Forget Password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
+
+<!-- <div class="container login-container">
+        <div class="row justify-content-sm-center">
+            <div class="col-sm-10 col-md-6">
+            <div class="card border-info">
+                <div class="card-header">Sign in to continue...</div>
+                <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <img src="./assets/other-media/login-key.png" [ngStyle]="{'width':'128px','height':'128px'}">
+                        <h4 class="text-center">ABC Ltd</h4>
+                    </div>
+                    <div class="col-md-8">
+                        <form #f="ngForm" (ngSubmit)="loginSubmit(f)" novalidate>
+                        <input type="text" kendoTextBox class="form-control mb-2" placeholder="Username" [(ngModel)]="loginForm.username" #email="ngModel" id="username" name="username" class="form-control" required>
+                        <input type="password" kendoTextBox class="form-control mb-2" [(ngModel)]="loginForm.password" placeholder="Password"  name = "password" required>
+                        <button type="submit" [disabled]="loginError"  class="btn btn-primary">Login</button>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    <simple-notifications [options]="options"></simple-notifications>
+</div> -->
+<!-- <div class="login-img3-body">   
+    <div class="container">
+        <form class="login-form" #f="ngForm" (ngSubmit)="loginSubmit(f)" novalidate>
+            <div class="login-wrap">
+            <p class="login-img"><i class="icon_lock_alt"></i></p>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon_profile"></i></span>
+                <input type="text" kendoTextBox class="form-control" placeholder="Username" 
+                [(ngModel)]="loginForm.username" #email="ngModel" id="username" name="username" class="form-control" required>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+                <input type="password" kendoTextBox class="form-control" [(ngModel)]="loginForm.password" 
+                placeholder="Password"  name = "password" required>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" [disabled]="loginError" type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+</div> -->
+
+<!-- <section class="material-half-bg">
+    <div class="cover"></div>
+  </section>
+  <section class="login-content">
+    <div class="logo">
+      <h1>ADMIN</h1>
+    </div>
+    <div class="login-box {{filipClass}}">  
+        
+        <div class="err-login-msg">
+            <span class='err-text'>{{dialogText}}</span>
+        </div>
+
+        <form class="login-form" #f="ngForm" (ngSubmit)="loginSubmit(f)" novalidate>
+            <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
+            <div class="form-group">
+            <label class="control-label">USERNAME  - {{timeText}}</label>
+            <span class="input-group-addon"><i class="icon_profile"></i></span>
+                <input type="text" kendoTextBox class="form-control" placeholder="Username" 
+                    [(ngModel)]="loginForm.username" #email="ngModel" id="username" name="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+            <label class="control-label">PASSWORD</label>
+            <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+                <input type="password" kendoTextBox class="form-control" [(ngModel)]="loginForm.password" 
+                placeholder="Password"  name = "password" required>
+            </div>
+            <div class="form-group">
+            <div class="utility">
+                <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Forgot Password ?</a></p>
+            </div>
+            </div> 
+            <div class="form-group btn-container">
+            <button class="btn btn-primary btn-block" [disabled]="loginError"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+            </div> 
+      </form>
+      <div class="form-group" *ngIf="timeText != '' ">
+            <h3 >{{timeText}}</h3>
+      </div>
+    </div>
+</section> -->
+ <section class="bg-gradient primary">
+ 
+  <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+    
+          <div class="col-xl-10 col-lg-12 col-md-9">
+    
+            <div class="card o-hidden border-0 shadow-lg my-5">
+              <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->   
+                
+                <div class="row">
+                  <!-- <div class="col-lg-6 d-none d-lg-block bg-login-image"></div> -->
+                  <div class="col-lg-6">
+                    <div class="p-5">  
+                      <div class="text-center">
+                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                      </div>
+                      <div class="text-center login-notification-error" *ngIf="loginError">
+                          <h6>{{errorMessg}}</h6> 
+                      </div>
+                      <!-- (ngSubmit)="loginSubmit(f)" -->
+                      <form class="login-form" #f="ngForm" novalidate>
+                        <div class="form-group">
+                            <input type="text" kendoTextBox class="form-control form-control-user" placeholder="Username" 
+                                [(ngModel)]="loginForm.username" #email="ngModel" name="username" class="form-control" required="true">
+                        </div>
+                        <div class="form-group">
+                                <input type="password" kendoTextBox class="form-control form-control-user" [(ngModel)]="loginForm.password" 
+                                placeholder="Password"  name = "password" required="true">
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-lg-3 example-col">
+                        <a href="javascript:void(0)" (click)="loginSubmit(f)" kendoButton class="btn btn-primary">
+                          Login
+                        </a></div>
+                        <hr>                        
+                      </form>
+                      <!-- <div class="text-center">
+                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+

@@ -27,14 +27,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
             ],
-            "scripts": [],
+            "scripts": [
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
+              "fileReplacements": [ 
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
@@ -93,7 +93,7 @@
             ]
           }
         },
-        "lint": {
+        "lint": {  
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
