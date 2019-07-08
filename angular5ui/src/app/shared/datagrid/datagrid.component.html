@@ -91,9 +91,19 @@
               </th>
             <th (click)="listSort('email')">Email</th>
             <th>Picture</th> -->
+            <!-- {{imagePath}}user/{{row.profile_pic}} -->
+
                 <th>Action</th>
                 </tr>
-                  <tr *ngFor="let row of listData">
+                  <!-- <ng-container *ngFor="let row of columns">
+                        <ng-container *ngFor="let row of listData">
+                            <tr *ngIf="">
+
+                            </tr>
+                        </ng-container>
+                  </ng-container> -->
+                  <!-- <tr *ngFor="let row of listData">
+
                     <td>{{row.id}}</td>
                     <td>{{row.username}}</td>
                     <td>
@@ -102,11 +112,10 @@
                     <td>{{row.email}}</td>
                     <td align="center">
                       <span *ngIf="row.profile_pic === null">No Image</span>
-                      <!-- {{imagePath}}user/{{row.profile_pic}} -->
                       <img onError="this.src='./assets/img/no-image.png'" 
                       *ngIf="row.profile_pic != null" src="" 
                       [ngStyle]="{'width':'auto','height':'150px','border':'1px solid #ccc','padding':'5px','background-color':'#eee'}">
-                    </td>  
+                    </td>
                     <td>
                       <a routerLink="/admin/users/edit/{{row.id}}/{{pageNum}}">
                           <i class="fa fa-edit"></i>
@@ -115,7 +124,7 @@
                           <i class="fa fa-trash"></i>
                       </a>
                     </td>
-                  </tr>
+                  </tr> -->
                   <tr>
                     <td colspan="5" *ngIf="!listData">No Record(s) Found</td>
                   </tr>
@@ -126,18 +135,19 @@
                 <hr>
                 <nav aria-label="Page navigation example">
                   <ul class="pagination pg-blue">
-                    <!-- <li class="page-item" [ngClass]="{'disabled' : pageNum <= 1}">
-                      <a class="page-link" tabindex="-1" (click)="getListData((pageNum-1),limitNum, srchKey)">Previous</a>
+                      {{curPage}} / {{pageTotal}}
+                    <li class="page-item" [ngClass]="{'disabled' : curPage <= 1}">
+                      <a class="page-link" tabindex="-1" (click)="getListData((curPage-1))">Previous</a>
+                    </li>
+                    <li></li>
+                    <!-- <li *ngFor="let page of pagedGItems" class="page-item" [ngClass]="{'active': curPage == page}">
+                      <a class="page-link" href="javascript:void(0)" (click)="getListData(page)" 
+                      *ngIf="page.val != '...'">{{page}}</a>
+                      <a class="page-link" href="javascript:void(0)" *ngIf="page == '...'">{{page}}</a>
                     </li> -->
-                    <li *ngFor="let page of pagedGItems" class="page-item" [ngClass]="{'active': curPage == page.val}">
-                      <a class="page-link" href="javascript:void(0)" (click)="getListData(page.val)" 
-                      *ngIf="page.val != '...'">{{page.val}}</a>
-                      <a class="page-link" href="javascript:void(0)" *ngIf="page.val == '...'">{{page.val}}</a>
-                  </li>
-
-                    <!-- <li class="page-item" [ngClass]="{'disabled' : pageNum >= (totalPages)}">
-                      <a class="page-link" (click)="getListData((pageNum+1),limitNum, srchKey)">Next</a>
-                    </li> -->
+                    <li class="page-item" [ngClass]="{'disabled' : curPage == (pageTotal)}">
+                      <a class="page-link" tabindex="1" (click)="getListData((curPage+1))">Next</a>
+                    </li>
                     <!-- , sortByField, sortByDir -->
                   </ul>
                 </nav>

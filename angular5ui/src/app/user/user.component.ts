@@ -70,6 +70,12 @@ export class UserComponent {
             field: 'email',
             width:250,
         }
+        ,
+        {
+            title: 'Picture',
+            field: 'profile_pic',
+            width:250,
+        }
     ];
     sort: any[] = [
         {
@@ -215,7 +221,7 @@ export class UserComponent {
                 //this.totalListData = data;
                 if(totalRec != undefined){
                   if(totalRec){
-                      let totalData   = totalRec.totalRecord;
+                      let totalData   = totalRec.totalListRec;
                       this.totalRec   = totalData;
                       /*let totalPage   = Math.ceil(totalData / this.limitNum);
                       this.totalPages = totalPage;
@@ -277,8 +283,10 @@ export class UserComponent {
                 //this.totalPages = totalPage;
 
               //Get Pager services
-              //let pagesItems    = this.objPager.getPagesArray(this.totalPages, 2, pageNum);
-              //this.pagedGItems   = pagesItems;
+              // let pagesItems    = this.objPager.getPagesArray(this.totalPages, 2, pageNum);
+              // this.pagedGItems   = pagesItems;
+              // console.log(this.pagedGItems);
+
               }
         ));
   }

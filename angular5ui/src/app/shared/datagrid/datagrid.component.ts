@@ -35,7 +35,7 @@ export class DataGrid {
     @Input() formStyle: boolean;
     @Input() mainIcons;
 
-    @Input() totalPages;
+    @Input() totalRec;
 
     //Output Variable
     @Output()
@@ -49,8 +49,8 @@ export class DataGrid {
 
     public listData:any = [];;
     public allData      =   this.data;
-    //public totalPages = 0;
-    public totalRec:any = [];
+    //public totalRec = 0;
+    public pageTotal:any = [];
     public pagedGItems:any = [];
     public pagedItems:any =[];
     public curPage = 1;
@@ -83,37 +83,56 @@ export class DataGrid {
         console.log(this.gridbtns);
         */
         console.log(changes.data);
-       //if(changes.currentValue!= null && !changes.firstChange){
             console.log('##PData...',this.data);
         if(this.data){
             this.listData = this.data.record;
             let totalData   = this.data.totalRecord;
-            this.totalRec   = totalData;
-            console.log(this.listData, " :: ",this.totalPages);
-            let totalPage   = Math.ceil(this.totalPages / this.dictionary.gridDataLimit);
-            //this.totalPages = 8;
+            //this.totalRec   = totalData;
+            console.log(this.listData, " ::> ",this.totalRec);
+            let totalPage   = Math.ceil(this.totalRec / this.dictionary.gridDataLimit);
+            this.pageTotal = totalPage;
+            //this.totalRec = 8;
 
-            this.createPages(this.totalPages);
+            this.createPages(this.totalRec);
+            //alert(totalData); 
             //Get Pager services
-            let pagesItems      = this.objPager.getPagesArray( totalPage );
-            this.pagedGItems    = pagesItems;  
+            //let pagesItems      = this.objPager.getPagesArray( this.pageTotal);
+            //this.pagedGItems    = pagesItems;  
+
+            let pagesItems      =   this.objPager.getPager(totalData,1,3);
+            this.pagedGItems    =   pagesItems; 
             console.log("paged Data: ", this.pagedGItems);
+
+            this.initTable();
+
         }
-      //}    
+    }
+    initTable(){
+        console.log(this.columns);
+        var key;
+        for(key in this.listData){
+            let findField = this.columns.find((row) => row.field === this.listData[key]);
+            console.log(this.listData[key]," :CheckItem: ",findField);
+        }
+        //this.listData.forEach((row) => {});
     }
     //, limitNum, srchKey, queryType
     getListData(pageNum){
         this.curPage = pageNum;
         this.pageNav.emit(pageNum);
         //Get Pager services
-        let totalPage       = Math.ceil(this.totalPages / this.dictionary.gridDataLimit);
-        let pagesItems      = this.objPager.getPagesArray(totalPage, 2, pageNum);
-        this.pagedGItems    = pagesItems;
+        //let totalPage       = Math.ceil(this.totalRec / this.dictionary.gridDataLimit);
+        //let pagesItems      = this.objPager.getPagesArray(25, 2, pageNum);
+        //this.pagedGItems    = pagesItems;
+
+        let pagesItems      =   this.objPager.getPager(this.totalRec, pageNum);
+        this.pagedGItems    =   pagesItems;
+        console.log("Updated Pages Array: ", this.pagedGItems);
     }
 
-    createPages(totalPages){
+    createPages(totalRec){
         let items = [];
-        for (var i = 1; i <= totalPages; i++) {
+        for (var i = 1; i <= totalRec; i++) {
            this.pagedItems.push({val:i});
         }
       }
