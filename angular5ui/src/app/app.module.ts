@@ -27,7 +27,7 @@ import { NotificationModule } from '@progress/kendo-angular-notification';
 import { UserComponent } from './user/user.component';
 import { DataFormComponent } from './user/data-form/data-form.component';
 
-import { GridModule } from '@progress/kendo-angular-grid';
+//import { GridModule } from '@progress/kendo-angular-grid';
 //import { AgGridModule } from 'ag-grid-angular';
 import { UserFilterPipe } from './utilities/filter/user.pipe';
 
@@ -52,10 +52,12 @@ import {
   MatTooltipModule
 } from '@angular/material';
 
-// import {
-//   MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
-//   MatToolbarModule, MatMenuModule,MatIconModule, MatProgressSpinnerModule
-// } from '@angular/material';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+
+ import {
+   MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
+   MatToolbarModule, MatMenuModule,MatIconModule, MatProgressSpinnerModule
+ } from '@angular/material';
 import { ExcelExportModule } from '@progress/kendo-angular-excel-export';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
@@ -81,8 +83,9 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
   ],
   imports: [
     BrowserModule,
+    BsDropdownModule.forRoot(),
     BrowserAnimationsModule,
-    GridModule,
+    //GridModule,
     //AgGridModule.withComponents([]),
     AppRoutingModule,
     HttpClientModule,

@@ -2,7 +2,7 @@
 import {DataGridUtil} from './datagrid.util'
 import { Format } from './format';
 import { PagerService } from '../../services/paging/pager.service';
-import { GridDataResult, RowArgs, RowClassArgs, SelectAllCheckboxState, PageChangeEvent } from '@progress/kendo-angular-grid';
+//import { GridDataResult, RowArgs, RowClassArgs, SelectAllCheckboxState, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { DictionaryService } from '../../services/dictionary.service';
 
 export interface GridAction {
@@ -137,11 +137,11 @@ export class DataGrid {
         }
       }
 
-    public pageChange(event: PageChangeEvent): void {
+    /*public pageChange(event: PageChangeEvent): void {
         console.log('page change: ',event);
         this.skip = event.skip;
         //this.loadItems();
-    }
+    }*/
 
     selectedClass(columnName: string): any {
         return columnName == this.sort.column ? 'sort-' + this.sort.descending : false;

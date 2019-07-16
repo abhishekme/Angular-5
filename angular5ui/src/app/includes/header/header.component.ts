@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+  show: boolean = false;
+  show1: boolean = false;
   constructor(private router: Router) { }
 
   ngOnInit() {
@@ -15,6 +16,13 @@ export class HeaderComponent implements OnInit {
   logOut(){
     sessionStorage.removeItem('currentUser');
     this.router.navigateByUrl('/Login');
-    //top.location.href = '/Login';
+  }
+  pageLink(linkRef:any){
+    if(linkRef){
+      this.router.navigateByUrl(linkRef);
+      setTimeout(() => {
+        this.show = false;
+      },1)      
+    }
   }
 }
